@@ -1,0 +1,229 @@
+1.Create a TypeScript program to implement a class hierarchy for different types of animals. Each animal should have a name, age, and sound that it makes. Use inheritance to create subclasses for different types of animals such as mammals, birds, and fish.
+
+class Animal {
+    protected name: string;
+    protected age: number;
+    protected sound: string;
+  
+    constructor(name: string, age: number, sound: string) {
+      this.name = name;
+      this.age = age;
+      this.sound = sound;
+    }
+    makeSound(): void {
+        console.log(`${this.name} makes ${this.sound} sound`);
+      }
+      
+}
+class Mammal extends Animal {
+    constructor(name: string, age: number, sound: string) {
+      super(name, age, sound);
+    }
+  
+    feedMilk(): void {
+      console.log(`${this.name} feeds its young with milk`);
+    }
+  }
+  class Bird extends Animal {
+    constructor(name: string, age: number, sound: string) {
+      super(name, age, sound);
+    }
+  
+    fly(): void {
+      console.log(`${this.name} its flying`);
+    }
+  }
+  class Fish extends Animal {
+    constructor(name: string, age: number, sound: string) {
+      super(name, age, sound);
+    }
+  
+    swim(): void {
+      console.log(`${this.name} is swimming`);
+    }
+  }
+  const cat = new Mammal('Cat', 2, 'Meow');
+cat.makeSound(); 
+cat.feedMilk(); 
+ 
+const parrot = new Bird('Parrot', 1, 'Squawk');
+parrot.makeSound(); 
+parrot.fly(); 
+ 
+const goldfish = new Fish('Goldfish', 3, 'Bloop');
+goldfish.makeSound(); 
+goldfish.swim(); 
+
+2.Implement a function in TypeScript to find the maximum value in an array of numbers. The function should take an array of numbers as input and return the maximum value.
+
+ function findMax(numbers: number[]): number {
+if (numbers.length === 0) {
+throw new Error('Array is empty!');
+}
+
+let max = numbers[0];
+for (let i = 1; i < numbers.length; i++) {
+if (numbers[i] > max) {
+max = numbers[i];
+}
+}
+
+return max;
+}
+const numbers = [1, 2, 3, 4, 5];
+const max = findMax(numbers);
+console.log(max); // Output: 5
+
+3.Write a TypeScript program to create a simple calculator. The calculator should have functions to perform basic arithmetic operations such as addition, subtraction, multiplication, and division. The program should prompt the user to enter two numbers and the operation they want to perform.
+function calculate(operation: string, num1: number, num2: number): number {
+  let result: number;
+  switch (operation) {
+    case "+":
+      result = num1 + num2;
+      break;
+    case "-":
+      result = num1 - num2;
+      break;
+    case "*":
+      result = num1 * num2;
+      break;
+    case "/":
+      result = num1 / num2;
+      break;
+    default:
+      throw new Error("Invalid operation: " + operation);
+  }
+  return result;
+}
+ 
+function promptAndCalculate() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  
+  rl.question("Enter an operation (+, -, *, /): ", (operation: string) => {
+    rl.question("Enter the first number: ", (num1: string) => {
+      rl.question("Enter the second number: ", (num2: string) => {
+        const result = calculate(operation, Number(num1), Number(num2));
+        console.log(`${num1} ${operation} ${num2} = ${result}`);
+        rl.close();
+      });
+    });
+  });
+}
+ 
+promptAndCalculate();
+ 
+
+4.Implement a TypeScript program to create a to-do list. The program should have a class for the to-do item that includes a description, due date, and completion status. The program should allow the user to add, remove, and complete items from the list.
+class TodoItem {
+    private description: string;
+    private dueDate: Date;
+    private isComplete: boolean;
+  
+    constructor(description: string, dueDate: Date) {
+      this.description = description;
+      this.dueDate = dueDate;
+      this.isComplete = false;
+    }
+    public getDescription(): string {
+        return this.description;
+      }
+    
+      public setDescription(description: string): void {
+        this.description = description;
+      }
+    
+      public getDueDate(): Date {
+        return this.dueDate;
+      }
+    
+      public setDueDate(dueDate: Date): void {
+        this.dueDate = dueDate;
+      }
+    
+      public getIsComplete(): boolean {
+        return this.isComplete;
+      }
+    
+      public setIsComplete(isComplete: boolean): void {
+        this.isComplete = isComplete;
+      }
+    }
+    class TodoList {
+        private items: TodoItem[];
+      
+        constructor() {
+          this.items = [];
+        }
+      
+        public addItem(item: TodoItem): void {
+          this.items.push(item);
+        }
+      
+        public removeItem(item: TodoItem): void {
+          const index = this.items.indexOf(item);
+          if (index !== -1) {
+            this.items.splice(index, 1);
+          }
+        }
+      
+        public completeItem(item: TodoItem): void {
+          item.setIsComplete(true);
+        }
+      
+        public getItems(): TodoItem[] {
+          return this.items;
+        }
+      }
+      
+      // Example usage:
+      const todoList = new TodoList();
+      const item1 = new TodoItem("Buy milk", new Date("2023-03-31"));
+      const item2 = new TodoItem("Do laundry", new Date("2023-04-01"));
+      todoList.addItem(item1);
+      todoList.addItem(item2);
+      console.log(todoList.getItems()); 
+      todoList.completeItem(item1);
+      console.log(todoList.getItems()); 
+      todoList.removeItem(item2);
+      console.log(todoList.getItems());
+ 
+
+5.Write a TypeScript program to create a class for a car. The car should have properties for the make, model, year, and current speed. Implement methods to accelerate, decelerate, and stop the car. The program should allow the user to interact with the car by entering commands to speed up, slow down, or stop the car.
+
+class Car {
+    make: string;
+    model: string;
+    year: number;
+    currentSpeed: number;
+  
+    constructor(make: string, model: string, year: number) {
+      this.make = make;
+      this.model = model;
+      this.year = year;
+      this.currentSpeed = 0;
+    }
+  
+    accelerate(speed: number): void {
+      this.currentSpeed += speed;
+      console.log(`Accelerating to ${this.currentSpeed} mph...`);
+    }
+  
+    decelerate(speed: number): void {
+      this.currentSpeed -= speed;
+      console.log(`Decelerating to ${this.currentSpeed} mph...`);
+    }
+  
+    stop(): void {
+      this.currentSpeed = 0;
+      console.log('Stopping the car...');
+    }
+  }
+  
+  const car = new Car('Toyota', 'Corolla', 2022);
+  console.log(car); 
+  car.accelerate(40); 
+  car.decelerate(100); 
+  car.stop();
